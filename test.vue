@@ -1,14 +1,18 @@
 <template>
     <div>
-        
+        <div v-if="state.isAuthenticated">
+            <div>Welcome, {{ state.user.name }}!</div>
+            <button @click="handleLogout">Log Out</button>
+        </div>
+        <div v-else>
             <button @click="handleLogin">Log In</button>
-     
+        </div>
     </div>
 </template>
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { myMSALObj } from '../plugins/apiConfig/msalConfig';
-import { useAuth } from '../plugins/apiConfig/useAuth';
+import { myMSALObj, state } from './config/msalConfig';
+import { useAuth } from './config/useAuth';
 const { login, logout, handleRedirect } = useAuth();
 const handleLogin = async () => {
 await login();
