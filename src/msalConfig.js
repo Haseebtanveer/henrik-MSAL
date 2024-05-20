@@ -4,7 +4,7 @@ export const msalConfig = {
     auth: {
         clientId: "493ebe00-5bd5-4957-a102-2e6a6ee86752",
         authority: "https://login.microsoftonline.com/56841a8d-d6d0-40c5-a7e6-26fa3cd19c0b",
-        redirectUri: "http://localhost:8000", // Change this to your redirect URI
+        redirectUri: "https://henrik-msal-5sqy.vercel.app/", // Change this to your redirect URI
         postLogoutRedirectUri: "/" // Change this to your post-logout redirect URI
     },
     cache: {
