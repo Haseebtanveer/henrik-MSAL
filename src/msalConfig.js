@@ -1,12 +1,11 @@
-import { InteractionRequiredAuthError, LogLevel, PublicClientApplication } from '@azure/msal-browser';
+import { LogLevel } from '@azure/msal-browser';
 
-// Config object to be passed to Msal on creation
-const msalConfig = {
+export const msalConfig = {
     auth: {
         clientId: "493ebe00-5bd5-4957-a102-2e6a6ee86752",
         authority: "https://login.microsoftonline.com/56841a8d-d6d0-40c5-a7e6-26fa3cd19c0b",
-        redirectUri: "http://localhost:8000",
-        postLogoutRedirectUri: "/" // Must be registered as a SPA redirectURI on your app registration
+        redirectUri: "http://localhost:8000", // Change this to your redirect URI
+        postLogoutRedirectUri: "/" // Change this to your post-logout redirect URI
     },
     cache: {
         cacheLocation: "localStorage"
@@ -39,26 +38,10 @@ const msalConfig = {
     }
 };
 
-const initializeMsalInstance = async () => {
-    const msalInstance = new PublicClientApplication(msalConfig);
-    await msalInstance.initialize();
-    return msalInstance;
+export const loginRequest = {
+    scopes: ["User.Read"]
 };
 
-const msalInstancePromise = initializeMsalInstance();
-
-const msl = new InteractionRequiredAuthError(msalConfig);
-console.log(msl);
-
-// Add here scopes for id token to be used at MS Identity Platform endpoints.
-const loginRequest = {
-    scopes: ['User.Read'],
+export const graphConfig = {
+    graphMeEndpoint: "https://graph.microsoft.com/v1.0/me"
 };
-
-// Add here the endpoints for MS Graph API services you would like to use.
-const graphConfig = {
-    graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me',
-};
-
-// Export everything
-export { msalConfig, msalInstancePromise, loginRequest, graphConfig };

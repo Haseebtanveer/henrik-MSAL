@@ -6,8 +6,10 @@ import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
 import VueSimpleAlert from "vue-simple-alert";
 import { setHeaders } from "./plugins/apiConfig/config";
-
 import router from "./plugins/router";
+import msalPlugin from './msalPlugin';
+
+Vue.use(msalPlugin);
 
 Vue.use(Vuetify);
 
@@ -49,5 +51,8 @@ setHeaders();
 new Vue({
     router,
     vuetify: new Vuetify(),
+    async created() {
+        await this.$msal.init();
+    },
     render: (h) => h(App)
 }).$mount("#app");
